@@ -10,6 +10,7 @@
 
 
   D_land %>%
+    filter(code_1 %in% c("Blame Shifting","Passing the Buck"))%>%
     group_by(direction,specificity)%>%
     summarize(n=n())%>%
     ggplot+

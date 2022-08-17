@@ -62,9 +62,25 @@
       theme(legend.position="bottom")
     
     
+#Hypothesis 4---------------------------------------
+ #Sub-national political parties prefer to shift the blame vertically to the federal level than horizontally to other constituent units. 
     
-    %>%
-      mutate(code_1=relevel(code_1, ref="Self-Praise"))
+    D_land %>%
+      filter(code_1 %in% c("Blame Shifting","Passing the Buck"))%>%
+      group_by(direction)%>%
+      summarize(n=n())%>%
+      ggplot+
+      aes(x=direction, y=n, fill=direction)+
+      geom_col(position=position_dodge())+
+      theme_minimal()+
+      xlab("Level of Blame Assignment")+ylab("Number of Coded Statements")+
+      scale_fill_manual(values=viridis(5))+
+      theme(legend.position = "none")
+    
+    
+#Hypothesis 5-------------------------------
+  #H5: Party representatives which are part of the coalition governments at federal and sub-national levels prefer the “softer” strategy of self-praise over blame-shifting.
+    
     
     
     
