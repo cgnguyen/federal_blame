@@ -17,6 +17,11 @@
     mutate(party=fct_relevel(party,"AFD","FW","LINKE","FDP","GRUENE","SPD","UNION"))
   
 
+  D<-
+    D%>%
+      mutate(gov_p=as.factor(`r-o`))
+  
+  
   ## assign main labels to code --------
   #Do separately for Bund and Land due to different length of codes 
   D_land<-
@@ -28,8 +33,7 @@
                                "Blame Shifting" = "2",
                                "Self-Praise" = "3",
                                "Cooperation" = "4",
-                               "Federalism" = "5")))%>%
-    filter(code_1=="Passing the Buck"|code_1=="Blame Shifting")
+                               "Federalism" = "5")))
   
   #Here 1=10 = Federalism Code
   D_bund<-
@@ -42,6 +46,12 @@
                                        "Self-Praise" = "8",
                                        "Cooperation" = "9",
                                        "Federalism" = "1")))
+  
+  
+  D_bund$gov_p
+  
+  
+  D<-rbind(D_bund,D_land)
  
   ##Code Specific types of Blame ------------------------------------------
   ###Direction of Blame ---------------------------------------------
@@ -97,16 +107,7 @@
                           "specific" = "209",
                           "specific" = "210",
                           "diffuse" = "211"))
-  
-  
-  
-  
-  
 
-  
-  
-  
-  
   #Direction of blame
   D$direction <- fct_recode(D$code_2,
                             "Bund und Länder" = "101 Bund Länder (allgemein)",
