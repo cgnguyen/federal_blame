@@ -84,4 +84,27 @@
     
     
     
+#Extra Figure - Distribution of Coded statements in general 
+    D$code_1 <- D$code_1 %>%
+      fct_relevel(
+        "Federalism", "Cooperation", "Self-Praise", "Passing the Buck",
+        "Blame Shifting"
+      )
+    
+    
+    D%>%
+      group_by(code_1)%>%
+      summarize(n=n())%>%
+        ggplot(aes(x=code_1,y=n, fill=code_1))+
+        geom_col()+
+        theme_minimal()+
+        scale_fill_manual(values=viridis(8))+
+        theme(legend.position = "none")+
+        xlab("")+ylab("Absolute Count of Coded Segments")+
+        coord_flip()+
+        scale_x_discrete(labels=c("Federalism" = "Value of Federalism")
+    
+    
+    
+    
     
